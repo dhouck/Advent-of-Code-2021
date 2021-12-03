@@ -1,0 +1,42 @@
+>>> from itertools import pairwise
+>>> with open("input.txt") as f:
+...     i = None
+...     count = None
+...     for window in triplewise(f):
+...             cur = sum(map(int, window))
+...             if i is not None and cur > i:
+...                     count += 1
+...             i = cur
+...
+Traceback (most recent call last):
+  File "<stdin>", line 4, in <module>
+NameError: name 'triplewise' is not defined
+>>> def triplewise(iterable):
+...     "Return overlapping triplets from an iterable"
+...     # triplewise('ABCDEFG') -> ABC BCD CDE DEF EFG
+...     for (a, _), (b, c) in pairwise(pairwise(iterable)):
+...         yield a, b, c
+...
+>>> with open("input.txt") as f:
+...     i = None
+...     count = None
+...     for window in triplewise(f):
+...             cur = sum(map(int, window))
+...             if i is not None and cur > i:
+...                     count += 1
+...             i = cur
+...
+Traceback (most recent call last):
+  File "<stdin>", line 7, in <module>
+TypeError: unsupported operand type(s) for +=: 'NoneType' and 'int'
+>>> with open("input.txt") as f:
+...     i = None
+...     count = 0
+...     for window in triplewise(f):
+...             cur = sum(map(int, window))
+...             if i is not None and cur > i:
+...                     count += 1
+...             i = cur
+...
+>>> count
+1589
