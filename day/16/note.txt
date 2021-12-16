@@ -1,0 +1,1 @@
+At first, I wasnʼt sure if I wanted to do this in Python or C++.  C++ has a better type system, but python has bigint.  I figured that the built-in or available libraries wouldnʼt make much difference.  Having done this in Python, I think it would have been easier to find and use a C++ bigint library.
