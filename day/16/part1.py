@@ -1,22 +1,11 @@
 #!/usr/bin/env python
 from logging import debug, info, warning, error, exception, critical
 from pprint import pprint, pformat
-from typing import Generic, TypeVar
 
 from bitarray.util import ba2int, hex2ba
 
 import aoc
 from packet import parse_packet, Packet, LiteralPacket, OperatorPacket
-
-
-T = TypeVar('T')
-
-
-class Ref(Generic[T]):
-	__slots__ = 'val'
-	
-	def __init__(self, val: T):
-		self.val: T = val
 
 
 def version_sum(packet: Packet) -> int:
