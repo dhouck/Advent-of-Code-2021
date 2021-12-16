@@ -6,6 +6,8 @@ name = "pypi"
 [packages]
 coloredlogs = "*"
 numpy = "*"
+bitarray = "*"
+more-itertools = "*"
 
 [dev-packages]
 
