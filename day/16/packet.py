@@ -2,7 +2,9 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from enum import Enum
+from functools import reduce
 from logging import debug, info, warning, error, exception, critical
+from operator import mul, gt, lt, eq
 from typing import Generic, Literal
 
 from bitarray import bitarray
@@ -12,7 +14,14 @@ from aoc import indent
 
 
 class PacketType(Enum):
+	SUM=0
+	PRODUCT=1
+	MIN=2
+	MAX=3
 	LITERAL=4
+	GREATER=5
+	LESS=6
+	EQUAL=7
 	
 	# Fill in other possible values with generic names
 	# From timespan example in official docs
@@ -28,6 +37,10 @@ class LiteralPacket:
 	packet_type: Literal[PacketType.LITERAL] = field(
 		init=False, default=PacketType.LITERAL)
 	value: int
+	
+	def evaluate(self):
+		debug(f'{indent}Evaluating literal packet {self.value}')
+		return self.value
 
 
 @dataclass(slots=True)
@@ -35,6 +48,32 @@ class OperatorPacket:
 	version: int
 	packet_type: PacketType
 	children: list[Packet]
+	
+	def evaluate(self):
+		debug(f'{indent}Evaluating {self.packet_type} packet')
+		with indent:
+			children_values = (child.evaluate() for child in self.children)
+			def binop(op):
+				lhs, rhs = children_values
+				return int(op(lhs, rhs))
+			
+			match self.packet_type:
+				case PacketType.SUM:
+					return sum(children_values)
+				case PacketType.PRODUCT:
+					return reduce(mul, children_values, 1)
+				case PacketType.MIN:
+					return min(children_values)
+				case PacketType.MAX:
+					return max(children_values)
+				case PacketType.GREATER:
+					return binop(gt)
+				case PacketType.LESS:
+					return binop(lt)
+				case PacketType.EQUAL:
+					return binop(eq)
+				case op:
+					raise ValueError(f'Unknown op: {op}')
 
 
 Packet = LiteralPacket | OperatorPacket
