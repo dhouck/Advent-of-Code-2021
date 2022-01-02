@@ -7,4 +7,5 @@ Daniel Houck <AdventOfCode@DRHouck.me>
 These are my solutions to the https://adventofcode.com/2021[Advent of Code 2021] problems.  I make no guarantees of code quality or anything else.  In fact at least one of them doesnʼt even solve the problem in the general case, just for my particular input.
 
 = Notes
-Because Advent of Code is largely scored based on time, even though I usually wasnʼt trying very hard to be fast, a lot of this is faster/lower quality than I usually do.  Once I submitted a solution I tried to avoid changing the relevant file, although I probably did occasionally by mistake.
+ * Because Advent of Code is largely scored based on time, even though I usually wasnʼt trying very hard to be fast, a lot of this is faster/lower quality than I usually do.  Once I submitted a solution I tried to avoid changing the relevant file, although I probably did occasionally by mistake.
+ * Because of a vacation in late December, I only did up to day 15 during the actual event.  I will endeavor to (or actually have and forgot to update this README file) finish the rest soon.  Iʼll focus less on time and more on learning numpy or other cool technologies.
